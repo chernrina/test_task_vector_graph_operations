@@ -42,7 +42,7 @@ class RegistrationView(View):
 
 			user = authenticate(username=form.cleaned_data['username'],password=form.cleaned_data['password'])
 			login(request,user)
-			return HttpResponseRedirect('/')
+			return HttpResponseRedirect('/lk/{}'.format(form.cleaned_data['username']))
 		return render(request,'registration.html',{'form':form})
 
 def lk(request,username):

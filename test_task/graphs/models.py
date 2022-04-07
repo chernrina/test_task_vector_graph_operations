@@ -6,6 +6,7 @@ from django.conf import settings
 
 class Graph(models.Model):
     id_graph = models.AutoField(primary_key=True)
+    name = models.CharField(max_length=100)
     user_id = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     value = ArrayField(
         ArrayField(
