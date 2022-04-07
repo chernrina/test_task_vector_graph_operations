@@ -3,6 +3,7 @@ from .forms import LoginForm, RegistrationForm
 from django.contrib.auth import authenticate,login
 from django.http.response import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
+from django.views.generic import TemplateView
 
 class LoginView(View):
 
@@ -43,3 +44,9 @@ class RegistrationView(View):
 			login(request,user)
 			return HttpResponseRedirect('/')
 		return render(request,'registration.html',{'form':form})
+
+def lk(request,username):
+	if str(request.user) == username and request.user.is_authenticated:
+		return TemplateView.as_view(template_name='index.html')(request)
+	else:
+		return redirect('/')

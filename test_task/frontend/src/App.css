@@ -1,0 +1,29 @@
+@import'https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css';
+
+.main-info {
+  margin-top:100px;
+}
+
+.main-body {
+  min-height: 250px;
+}
+
+.body {
+  display:flex;
+  flex-direction: row;
+
+}
+
+.body-side {
+  margin: 30px 30px;
+  width:15%;
+  height: auto;
+  background: white;
+}
+
+.body-center {
+  width: 60%;
+  height: 650px;
+  background: #4D7E9A30;  
+  
+}

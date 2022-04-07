@@ -57,7 +57,10 @@ ROOT_URLCONF = 'test_task.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'test_task/templates')],
+        'DIRS': [
+        	os.path.join(BASE_DIR, 'frontend/build'),
+        	os.path.join(BASE_DIR, 'test_task/templates'),
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -127,6 +130,7 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 STATICFILES_DIRS = [
+	os.path.join(BASE_DIR, 'frontend/build/static'),
     os.path.join(BASE_DIR, "test_task/templates/static"),
 ]
 
@@ -134,3 +138,7 @@ STATICFILES_DIRS = [
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+CORS_ORIGIN_WHITELIST = [
+    "http://localhost:3000",
+]
