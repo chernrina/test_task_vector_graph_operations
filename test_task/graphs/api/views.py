@@ -20,6 +20,20 @@ class GraphsViewSet(viewsets.ModelViewSet):
 	queryset = Graph.objects.all()
 	serializer_class = GraphSerializer
 
+class GraphsUserViewSet(viewsets.ModelViewSet):
+
+    serializer_class = GraphSerializer
+    queryset = Graph.objects.all()
+
+    def get(self, request, *args, **kwargs):
+        username = kwargs.get('user','')
+        userId = User.objects.filter(username=username).first()
+        if userId:
+            queryset = Graph.objects.filter(user_id=userId) 
+            serializer = self.get_serializer(queryset, many=True)
+            return Response(serializer.data)
+        return Response([])
+
 class GraphViewSet(viewsets.ModelViewSet):
 
     serializer_class = GraphSerializer
@@ -82,4 +96,33 @@ class VertexViewSet(viewsets.ModelViewSet):
             else:
                 return Response("No such graph",status=status.HTTP_404_NOT_FOUND)
         return Response([])
+
+
+def calculate(graph, vertex, flag, op,change=False):
+    if (flag == 0): #последнее вычисление
+
+        result = vertex[graph[-1][0]]["value"] #значение первого вектора
+        components = graph[-1][1:-1] if change else graph[-1][1:] 
+        if (op == 1): #сложение
+            for elem in components:
+                diff = len(vertex[elem]["value"])-len(result)
+                result = list(map(sum, zip(result + [0,]*diff, vertex[elem]["value"] + [0,]*-diff)))
+        else: #умножение
+            for elem in components:
+                diff = len(vertex[elem]["value"])-len(result)
+                result = list(map(lambda x, y: x*y, result + [0,]*diff, vertex[elem]["value"] + [0,]*-diff))
+        return result
+    else: #пересчитать граф
+        types = [0,] * len(vertex)
+        def dfs(ind):
+            for elem in graph[ind]:
+                if types[elem] == 0: # не посещенная вершина
+                    types[elem] = vertex[elem]["type_vertex"]
+                    dfs(elem)
+                    if types[elem] == 2:
+                        vertex[graph[elem][-1]]["value"] = calculate(graph[:elem+1],vertex,0,vertex[elem]["value"][0],True)
+                        types[graph[elem][-1]] = 1
+        dfs(-1)
+        print(vertex)
+
 

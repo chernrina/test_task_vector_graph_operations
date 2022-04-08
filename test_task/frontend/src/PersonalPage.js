@@ -14,10 +14,28 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 function PersonalPage() {
 
 	const [newProject,setNewProject] = useState(false)
-	const [projects,setProjects] = useState([])
+	const [projects,setProjects] = useState([
+    {
+        "id_graph": 11,
+        "name": "project1"
+    },
+    {
+        "id_graph": 12,
+        "name": "project 2"
+    }
+   ])
 	const [nameProject, setNameProject] = useState("")
 	const [error,setError] = useState("")
 	let  { username } = useParams()
+
+	useEffect(() => {
+		axios({
+  		method: "GET",
+  		url: "http://127.0.0.1:8000/api/graph/" + username
+  		}).then(response => {
+  			setProjects(response.data)
+  		})
+	}, [])
 
 
 	return (
@@ -43,10 +61,10 @@ function PersonalPage() {
 		      	<div class="body-center">
 		      		<div class="projects-area">
 		      			{projects.map(p => (	
-		      				<Link to={{ pathname: `/edit/${username}/${p.title}`, fromDashboard:false}}>     					      		
-					      		<div class="project" key={p.id}>
+		      				<Link to={{ pathname: `/edit/${username}/${p.name}`, fromDashboard:false}}>     					      		
+					      		<div class="project" key={p.id_graph}>
 					      			<div class="project-name">
-					      				{p.title}
+					      				{p.name}
 					      			</div>
 					      		</div>
 				      		</Link>

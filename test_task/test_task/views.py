@@ -1,9 +1,11 @@
 from django.views.generic.base import View
 from .forms import LoginForm, RegistrationForm
 from django.contrib.auth import authenticate,login
+from django.contrib.auth import logout as django_logout
 from django.http.response import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 from django.views.generic import TemplateView
+from django.shortcuts import redirect
 
 class LoginView(View):
 
@@ -46,6 +48,16 @@ class RegistrationView(View):
 		return render(request,'registration.html',{'form':form})
 
 def lk(request,username):
+	if str(request.user) == username and request.user.is_authenticated:
+		return TemplateView.as_view(template_name='index.html')(request)
+	else:
+		return redirect('/')
+
+def logout(request):
+    django_logout(request)
+    return redirect('/')
+
+def edit(request,username,projectname):
 	if str(request.user) == username and request.user.is_authenticated:
 		return TemplateView.as_view(template_name='index.html')(request)
 	else:
