@@ -19,6 +19,7 @@ class Graph(models.Model):
 
 class Vertex(models.Model):
     id_vertex = models.AutoField(primary_key=True)
+    local_id = models.IntegerField(blank=True)
     type_vertex = models.IntegerField(blank=True,validators=[MinValueValidator(1),
                                                             MaxValueValidator(2)])
     value = ArrayField(models.DecimalField(blank=True,max_digits=10,decimal_places=2))

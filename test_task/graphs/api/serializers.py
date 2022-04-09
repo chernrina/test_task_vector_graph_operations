@@ -18,4 +18,4 @@ class VertexSerializer(serializers.ModelSerializer):
 
 	class Meta:
 		model = Vertex
-		fields = ['id_vertex','type_vertex','value','graph_id']
+		fields = ['local_id','type_vertex','value','graph_id']

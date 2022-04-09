@@ -14,16 +14,7 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 function PersonalPage() {
 
 	const [newProject,setNewProject] = useState(false)
-	const [projects,setProjects] = useState([
-    {
-        "id_graph": 11,
-        "name": "project1"
-    },
-    {
-        "id_graph": 12,
-        "name": "project 2"
-    }
-   ])
+	const [projects,setProjects] = useState([])
 	const [nameProject, setNameProject] = useState("")
 	const [error,setError] = useState("")
 	let  { username } = useParams()

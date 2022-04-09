@@ -6,31 +6,12 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
 </head>
-<style>
 
-	.container {
-		width: 1025px;
-		margin: 0 auto;
-		padding: 0 10px;
-	}
-	
-    .btn {
-    	margin-top:20px;
-        background-color: #4D7E9A;
-    }
-    
-    .main-header {
-        margin: 0;
-        padding:0;
-        height: 50px;
-        background: #4D7E9A;
-    }
-</style>
 {% load crispy_forms_tags %}
 {% block content %}
 <body>
 	
-	<header class="main-header">     
+	<header class="navbar navbar-dark bg-info">     
 	</header>
 	<div class="row" style="margin-bottom:300px;margin-top:180px;">
 		<div class="col-md-6 offset-md-3">
@@ -39,7 +20,7 @@
 		<form action="" method="POST">
 			{% csrf_token %}
 			{{ form|crispy }}
-			<input type="submit" class="btn btn-primary" value="Get started!">
+			<input type="submit" style="margin-top:20px" class="btn btn-info" value="Get started!">
 		</form>
 		</div>
 	</div>
