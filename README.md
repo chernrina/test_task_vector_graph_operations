@@ -17,9 +17,20 @@
 Создание пользователя и базы данных для приложения:
 > psql -U postgres -f db.sql
 
-Миграции для создания таблиц в базе данных:
 >cd test_task
 
+Необходима установка следующих packages:
+> pip install -U Django 
+
+> pip install django-crispy-forms
+
+> pip install rest_framework
+
+> pip install djangorestframework
+
+> pip install psycopg2
+
+Миграции для создания таблиц в базе данных:
 >python manage.py makemigrations
 
 >python manage.py migrate
@@ -46,6 +57,8 @@ recalculate - сохраняет и пересчитывает все значе
 2. создание ребра включает в себя индекс начального и конечного узлов
 
 >Важно! Для создания узла типа operation в поле value нужно ввести [1] - узел add; [2] - узел mul
+
+> ! При первом создании графа перед вычислениями нажать save
 
 ### Проблемы
 
