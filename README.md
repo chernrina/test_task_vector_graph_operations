@@ -68,3 +68,34 @@
 При вычислениях иногда возникает Internal Server Error (500) - не исправлено. Если возникает, следует повторить последние действия.
 
 После calculate/recalculate сохранения не происходит, при необходимости сохранения следует нажать кнопку save.
+
+### Доп. тестирование
+Функциональность можно протестировать отдельно через API
+127.0.0.1:8000/api/graph/<str:user>/<str:graph> - post запрос для сохранения графа (граф хранится как список ребер) 
+> {
+    "name": <str:graph>,
+    "user_id": null,
+    "value": [[0,2],[1,2]]
+}
+
+127.0.0.1:8000/api/vertex/<str:user>/<str:graph> - post запрос для сохранения вершин графа (список вершин)
+>[{
+    "local_id": 0,
+    "type_vertex": 1,
+    "value": [1,2],
+    "graph_id": null
+},
+{
+    "local_id": 1,
+    "type_vertex":1,
+    "value": [1,2],
+    "graph_id": null
+},
+{
+    "local_id": 2,
+    "type_vertex": 2,
+    "value": [1],
+    "graph_id": null
+}]
+
+http://127.0.0.1:8000/api/calculate/1/<str:user>/<str:graph> - результат вычисления
